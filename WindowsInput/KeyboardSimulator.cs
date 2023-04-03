@@ -84,6 +84,11 @@ namespace WindowsInput
             _messageDispatcher.DispatchInput(inputList);
         }
 
+        private void SendSimulatedInputBackground(IntPtr hWnd, uint msg, VirtualKeyCode keyCode)
+        {
+            _messageDispatcher.DispatchInputBackground(hWnd, msg, (int)keyCode, 0);
+        }
+
         /// <summary>
         /// Calls the Win32 SendInput method to simulate a KeyDown.
         /// </summary>
@@ -92,6 +97,30 @@ namespace WindowsInput
         {
             var inputList = new InputBuilder().AddKeyDown(keyCode).ToArray();
             SendSimulatedInput(inputList);
+            return this;
+        }
+
+        /// <summary>
+        /// TODO: 
+        /// </summary>
+        /// <param name="hWnd"></param>
+        /// <param name="keyCode"></param>
+        /// <returns></returns>
+        public IKeyboardSimulator KeyDownBackground(IntPtr hWnd, VirtualKeyCode keyCode)
+        {
+            SendSimulatedInputBackground(hWnd, 0x0100, keyCode); // WM_KEYDOWN 0x0100
+            return this;
+        }
+
+        /// <summary>
+        /// TODO: 
+        /// </summary>
+        /// <param name="hWnd"></param>
+        /// <param name="keyCode"></param>
+        /// <returns></returns>
+        public IKeyboardSimulator KeyUpBackground(IntPtr hWnd, VirtualKeyCode keyCode)
+        {
+            SendSimulatedInputBackground(hWnd, 0x0101, keyCode); // WM_KEYUP 0x0101
             return this;
         }
 

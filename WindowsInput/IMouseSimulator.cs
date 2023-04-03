@@ -121,5 +121,23 @@ namespace WindowsInput
         /// </summary>
         /// <param name="timeout">The time to wait.</param>
         IMouseSimulator Sleep(TimeSpan timeout);
+
+        /// <summary>
+        /// TODO: 
+        /// </summary>
+        /// <param name="hWnd"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        IMouseSimulator LeftButtonDownBackground(IntPtr hWnd, int x, int y);
+
+        /// <summary>
+        /// TODO:
+        /// </summary>
+        /// <param name="hWnd"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        IMouseSimulator LeftButtonUpBackground(IntPtr hWnd, int x, int y);
     }
 }

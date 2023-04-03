@@ -91,6 +91,17 @@ namespace WindowsInput.Native
         public static extern UInt32 SendInput(UInt32 numberOfInputs, INPUT[] inputs, Int32 sizeOfInputStructure);
 
         /// <summary>
+        /// The PostMessage function sends keystrokes, mouse motions, and button clicks on a specific window handle.
+        /// </summary>
+        /// <param name="hWnd">Window Handle Id</param>
+        /// <param name="msg">Type of action to bt sent</param>
+        /// <param name="wParam">Key or Button to be sent</param>
+        /// <param name="lParam">Always Zero I guess?</param>
+        /// <returns></returns>
+        [DllImport("user32.dll")]
+        public static extern bool PostMessage(IntPtr hWnd, uint msg, int wParam, int lParam);
+
+        /// <summary>
         /// The GetMessageExtraInfo function retrieves the extra message information for the current thread. Extra message information is an application- or driver-defined value associated with the current thread's message queue. 
         /// </summary>
         /// <returns></returns>

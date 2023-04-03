@@ -22,6 +22,14 @@ namespace WindowsInput
         IKeyboardSimulator KeyDown(VirtualKeyCode keyCode);
 
         /// <summary>
+        /// TODO: 
+        /// </summary>
+        /// <param name="hWnd"></param>
+        /// <param name="keyCode"></param>
+        /// <returns></returns>
+        IKeyboardSimulator KeyDownBackground(IntPtr hWnd, VirtualKeyCode keyCode);
+
+        /// <summary>
         /// Simulates the key press gesture for the specified key.
         /// </summary>
         /// <param name="keyCode">The <see cref="VirtualKeyCode"/> for the key.</param>
@@ -38,6 +46,14 @@ namespace WindowsInput
         /// </summary>
         /// <param name="keyCode">The <see cref="VirtualKeyCode"/> for the key.</param>
         IKeyboardSimulator KeyUp(VirtualKeyCode keyCode);
+
+        /// <summary>
+        /// TODO: 
+        /// </summary>
+        /// <param name="hWnd"></param>
+        /// <param name="keyCode"></param>
+        /// <returns></returns>
+        IKeyboardSimulator KeyUpBackground(IntPtr hWnd, VirtualKeyCode keyCode);
 
         /// <summary>
         /// Simulates a modified keystroke where there are multiple modifiers and multiple keys like CTRL-ALT-K-C where CTRL and ALT are the modifierKeys and K and C are the keys.

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using WindowsInput.Native;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace WindowsInput
 {
@@ -63,6 +64,11 @@ namespace WindowsInput
         private void SendSimulatedInput(INPUT[] inputList)
         {
             _messageDispatcher.DispatchInput(inputList);
+        }
+
+        private void SendSimulatedInputBackground(IntPtr hWnd, uint msg, int keyCode, int mouse_pos)
+        {
+            _messageDispatcher.DispatchInputBackground(hWnd, msg, keyCode, mouse_pos);
         }
 
         /// <summary>
@@ -130,6 +136,40 @@ namespace WindowsInput
             SendSimulatedInput(inputList);
             return this;
         }
+
+        /// <summary>
+        /// TODO: 
+        /// </summary>
+        /// <param name="hWnd"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public IMouseSimulator LeftButtonDownBackground(IntPtr hWnd, int x, int y)
+        {
+            SendSimulatedInputBackground(hWnd, 0x0201, 0x0001, MakeLParam(x, y)); //WM_LBUTTONDOWN  0x0201 // Down 0x0001
+            return this;
+        }
+
+        /// <summary>
+        /// TODO: 
+        /// </summary>
+        /// <param name="hWnd"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public IMouseSimulator LeftButtonUpBackground(IntPtr hWnd, int x, int y)
+        {
+            SendSimulatedInputBackground(hWnd, 0x0202, 0x0000, MakeLParam(x, y)); //WM_LBUTTONUP  0x0202 // Down 0x0001
+            return this;
+        }
+
+        /// <summary>
+        /// TODO: 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public static int MakeLParam(int x, int y) => (y << 16) | (x & 0xFFFF);
 
         /// <summary>
         /// Simulates a mouse left button double-click gesture.
